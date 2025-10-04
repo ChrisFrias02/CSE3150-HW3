@@ -2,19 +2,18 @@
 #include <iostream>
 #include <cstring>
 
-// implementations
 void addStudent(char* name, double gpa, char* names[], double gpas[], int& size, int capacity) {
     if (size >= capacity) {
-        throw "Error: cannot add student — list is full.";
+        throw "List full";
     }
     if (name == nullptr || std::strlen(name) == 0) {
-        throw "Error: name is null or empty.";
+        throw "Invalid name.";
     }
     if (gpa < 0.0 || gpa > 4.0) {
-        throw "Error: GPA must be in [0.0, 4.0].";
+        throw "Invalid GPA.";
     }
 
-    size_t n = std::strlen(name);
+    std::size_t n = std::strlen(name);
     names[size] = new char[n + 1];
     std::strcpy(names[size], name);
     gpas[size] = gpa;
@@ -40,7 +39,8 @@ void printStudent(const char* name, const double& gpa) {
 
 double averageGPA(const double gpas[], int size) {
     if (size == 0) {
-        throw "Error: cannot compute average — no students.";
+ 
+        throw "No students";
     }
     double sum = 0.0;
     for (int i = 0; i < size; ++i) {
